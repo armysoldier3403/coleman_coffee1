@@ -1,81 +1,19 @@
-<form id="contactForm">
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" name="firstName" required><br><br>
+<form id="registrationForm">
 
-    <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="lastName" required><br><br>
+        <label for="username">Username:</label>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br><br>
+        <input type="text" id="username" name="username"><br>
 
-    <button type="submit">Submit</button>
-    <button type="reset">Reset Form</button>
-</form>
+        <label for="password">Password:</label>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const contactForm = document.getElementById('contactForm');
-        const firstNameInput = document.getElementById('firstName');
-        const lastNameInput = document.getElementById('lastName');
-        const emailInput = document.getElementById('email');
+        <input type="password" id="password" name="password"><br>
 
-        contactForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+        <label for="confirmPassword">Confirm Password:</label>
 
-            // Clear previous error messages
-            clearErrors();
+        <input type="password" id="confirmPassword" name="confirmPassword"><br>
 
-            let isValid = true;
+        <button type="button" onclick="validateRegistrationForm()">Register</button>
 
-            // Validate First Name
-            if (firstNameInput.value.trim() === '') {
-                displayError(firstNameInput, 'First Name is required.');
-                isValid = false;
-            }
+    </form>
 
-            // Validate Last Name
-            if (lastNameInput.value.trim() === '') {
-                displayError(lastNameInput, 'Last Name is required.');
-                isValid = false;
-            }
-
-            // Validate Email
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (emailInput.value.trim() === '') {
-                displayError(emailInput, 'Email is required.');
-                isValid = false;
-            } else if (!emailPattern.test(emailInput.value)) {
-                displayError(emailInput, 'Please enter a valid email address.');
-                isValid = false;
-            }
-
-            if (isValid) {
-                alert('Form submitted successfully!'); // Or send data to server
-                contactForm.reset(); // Clear form after successful submission
-            }
-        });
-
-        contactForm.addEventListener('reset', function() {
-            // This will automatically clear form fields
-            clearErrors(); // Also clear any displayed errors
-        });
-
-        function displayError(inputElement, message) {
-            let errorDiv = inputElement.nextElementSibling;
-            if (!errorDiv || !errorDiv.classList.contains('error-message')) {
-                errorDiv = document.createElement('div');
-                errorDiv.classList.add('error-message');
-                inputElement.parentNode.insertBefore(errorDiv, inputElement.nextSibling);
-            }
-            errorDiv.textContent = message;
-            errorDiv.style.color = 'red';
-        }
-
-        function clearErrors() {
-            document.querySelectorAll('.error-message').forEach(function(errorDiv) {
-                errorDiv.remove();
-            });
-        }
-    });
-</script>
- <script src="common_date_script.js"></script>
+    <p id="registrationErrorMessages"></p>
