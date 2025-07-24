@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - The Daily Grind</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add a style for error messages */
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: block; /* Ensures error message is on its own line */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <img src="logo.jpg" alt="The Daily Grind Logo">
+        <div class="address-info">
+            605 Washington St<br>
+            Fayette, IA 52142<br>
+            Tel: 888-555-5555
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="houseblend.html">House Blend</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="sitemap.html">Site Map</a></li> <li><a href="register.html">Register</a></li> </ul>
+    </nav>
+
+    <main>
+        <h2>Contact The Daily Grind</h2>
+
+        <form id="contactForm" action="#" method="post">
+            <div class="form-group">
+                <label for="salutation">Salutation:</label>
+                <select id="salutation" name="salutation">
+                    <option value="">--Select--</option>
+                    <option value="Mr.">Mr.</option>
+                    <option value="Ms.">Ms.</option>
+                    <option value="Mrs.">Mrs.</option>
+                    <option value="Dr.">Dr.</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+                <span id="firstNameError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+                <span id="lastNameError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail Address:</label>
+                <input type="email" id="email" name="email" required>
+                <span id="emailError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject">
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments" rows="5"></textarea>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="reply" name="reply" value="yes">
+                <label for="reply">Please check here if you wish to receive a reply:</label>
+            </div>
+
+            <button type="submit">Submit</button>
+            <button type="reset">Reset Form</button>
+        </form>
+    </main>
+
+    <footer>
+        <p id="currentDate"></p> </footer>
+
+    <script src="contact.js"></script>
+    <script src="global.js"></script> </body>
+</html>
