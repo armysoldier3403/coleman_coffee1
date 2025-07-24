@@ -1,0 +1,200 @@
+/* General Body Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, clean font */
+    margin: 0; /* Remove default body margin */
+    padding: 0; /* Remove default body padding */
+    background-color: #f8f8f8; /* Light background for the whole page */
+    color: #333; /* Dark gray text for readability */
+    line-height: 1.6; /* Improve readability of text */
+}
+
+/* Header Styling */
+header {
+    background-color: #5C4033; /* Dark coffee brown */
+    color: #fff; /* White text */
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 5px solid #A0522D; /* SaddleBrown border */
+}
+
+header h1 {
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 2.5em; /* Larger heading for main title */
+}
+
+/* Logo and Address Container */
+.top-bar {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space out logo and address */
+    align-items: center; /* Vertically align items */
+    padding: 10px 20px;
+    background-color: #fff; /* White background for the top bar */
+    border-bottom: 1px solid #eee;
+}
+
+.top-bar img {
+    max-width: 200px; /* Adjust logo size */
+    height: auto;
+    display: block; /* Remove extra space below image */
+}
+
+.address-info {
+    text-align: right;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #A0522D; /* SaddleBrown for navigation */
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+}
+
+nav ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Arrange links in a row */
+    justify-content: center; /* Center the links */
+}
+
+nav ul li {
+    margin: 0 15px; /* Spacing between navigation items */
+}
+
+nav ul li a {
+    color: #fff; /* White link text */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 5px; /* Rounded corners for links */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+nav ul li a:hover,
+nav ul li a:focus {
+    background-color: #8B4513; /* Darker brown on hover/focus */
+}
+
+/* Main Content Area */
+main {
+    padding: 20px;
+    max-width: 960px; /* Max width for content */
+    margin: 20px auto; /* Center the main content */
+    background-color: #fff; /* White background for content */
+    border-radius: 8px; /* Rounded corners for the content box */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Soft shadow */
+}
+
+main h2 {
+    color: #5C4033; /* Coffee brown heading */
+    border-bottom: 2px solid #eee; /* Subtle underline */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+main ul, main ol {
+    margin-bottom: 20px;
+    padding-left: 25px;
+}
+
+main ul li, main ol li {
+    margin-bottom: 8px;
+}
+
+main img {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto;
+    display: block; /* Center block images */
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Contact Form Styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block; /* Labels on their own line */
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #5C4033;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group select,
+.form-group textarea {
+    width: calc(100% - 22px); /* Full width minus padding and border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in width */
+    font-size: 1em;
+}
+
+.form-group textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 80px;
+}
+
+.checkbox-group {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.checkbox-group label {
+    display: inline-block; /* Keep label next to checkbox */
+    margin-left: 5px;
+    font-weight: normal;
+}
+
+button[type="submit"],
+button[type="reset"] {
+    background-color: #A0522D; /* SaddleBrown buttons */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover,
+button[type="reset"]:hover {
+    background-color: #8B4513; /* Darker brown on hover */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #333; /* Dark gray footer */
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    font-size: 0.85em;
+}
+
+/* Utility classes for text alignment (example of <span> usage) */
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Clearfix for floats if used (not strictly needed with flexbox/grid) */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
