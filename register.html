@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - The Daily Grind</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <img src="logo.jpg" alt="The Daily Grind Logo">
+        <div class="address-info">
+            605 Washington St<br>
+            Fayette, IA 51242<br>
+            Tel: 888-555-5555
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="houseblend.html">House Blend</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="sitemap.html">Site Map</a></li>
+            <li><a href="register.html">Register</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Register for The Daily Grind Updates!</h2>
+
+        <form id="registrationForm" action="#" method="post">
+            <div class="form-group">
+                <label for="regFirstName">First Name:</label>
+                <input type="text" id="regFirstName" name="regFirstName" required>
+                <span id="regFirstNameError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="regLastName">Last Name:</label>
+                <input type="text" id="regLastName" name="regLastName" required>
+                <span id="regLastNameError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="regEmail">E-mail Address:</label>
+                <input type="email" id="regEmail" name="regEmail" required>
+                <span id="regEmailError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="regPassword">Password:</label>
+                <input type="password" id="regPassword" name="regPassword" required>
+                <span id="regPasswordError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <span id="confirmPasswordError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob">
+                <span id="dobError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <select id="country" name="country">
+                    <option value="">--Select your Country--</option>
+                    <option value="USA">United States</option>
+                    <option value="CAN">Canada</option>
+                    <option value="GBR">United Kingdom</option>
+                    <option value="AUS">Australia</option>
+                    <option value="IND">India</option>
+                    </select>
+                <span id="countryError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Gender:</label><br>
+                <input type="radio" id="genderMale" name="gender" value="Male"> <label for="genderMale">Male</label><br>
+                <input type="radio" id="genderFemale" name="gender" value="Female"> <label for="genderFemale">Female</label><br>
+                <input type="radio" id="genderOther" name="gender" value="Other"> <label for="genderOther">Other</label>
+                <span id="genderError" class="error"></span>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="newsletter" name="newsletter" value="yes">
+                <label for="newsletter">Subscribe to our Newsletter</label>
+            </div>
+
+            <button type="submit">Register</button>
+            <button type="reset">Clear Form</button>
+        </form>
+    </main>
+
+    <footer>
+        <p id="currentDate"></p> </footer>
+
+    <script src="register.js"></script>
+    <script src="global.js"></script> </body>
+</html>
