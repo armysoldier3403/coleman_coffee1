@@ -3,27 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Daily Grind - House Blend</title>
+    <title>The Daily Grind House Blend</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+        <header>
+            <img src="bread.jpg " alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="house_blend.html">House Blend</a>
+                <a href="poll.html">Poll</a>
+                <a href="#">Shop Online</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="#">About Us</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="register.html">Register</a>
+                <a href="login.html">Login</a>
+            </nav>
+        </header>
 
-    <h1>The Daily Grind House Blend</h1>
-<nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="houseblend.html">House Blend</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="sitemap.html">Site Map</a></li>
-            <li><a href="register.html">Register</a></li>
-        </ul>
-    </nav>
-    <p>One sip and you will understand what makes this house blend so special. Our blend is made with the finest Latin American beans and grown fresh when you order. Buy it by the cup or by the pound.</p>
+        <main>
+            <h1>The Daily Grind House Blend</h1>
+            <p>
+                One sip and you will understand what makes this house blend so special. Our blend is made with the finest Latin American beans and grown fresh when you order. Buy it by the cup or by the pound.
+            </p>
 
-    <ol>
-        <li>Traditional</li>
-        <li>Decaffeinated</li>
-        <li>Holiday blend</li>
-    </ol>
-<script src="global.js"></script>
+            <h2>Available Blends:</h2>
+            <ol>
+                <li>Traditional</li>
+                <li>Decaffeinated</li>
+                <li>Holiday blend</li>
+            </ol>
+        </main>
+
+        <p class="mt-8">
+            <a href="index.html" class="btn btn-secondary">Back to Main Page</a>
+        </p>
+    </div>
+
+    <footer>
+        <p id="current-datetime"></p> <!-- Placeholder for current date and time -->
+        <p>&copy; 2023 The Daily Grind Coffee House. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to add the current date and time from server to the footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const datetimeElement = document.getElementById('current-datetime');
+            if (datetimeElement) {
+                // Fixed: Changed 'get_datetime.php' to '/get_datetime.php' for proper URL resolution
+                fetch('/get_datetime.php') 
+                    .then(response => response.text())
+                    .then(data => {
+                        datetimeElement.textContent = data;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching date and time:', error);
+                        datetimeElement.textContent = 'Date and time unavailable.';
+                    });
+            }
+        });
+    </script>
 </body>
 </html>
