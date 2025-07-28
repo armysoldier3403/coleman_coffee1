@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to The Daily Grind</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="houseblend.html">House Blend</a>
+                <a href="poll.html">Poll</a>
+                <a href="#">Shop Online</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="#">About Us</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="register.html">Register</a>
+                <a href="login.html">Login</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>Login to The Daily Grind</h1>
+            
+            <div class="form-container">
+                <form action="#" method="POST"> <!-- In a real app, this would point to a PHP login processor -->
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn">Login</button>
+                    </div>
+                </form>
+            </div>
+            
+            <p class="mt-4 text-gray-600">Don't have an account? <a href="register.html" class="link-text">Register here</a>.</p>
+            <p class="mt-2 text-gray-600">Forgot your password? <a href="reset_password.html" class="link-text">Reset it here</a>.</p>
+            <p class="mt-2 text-gray-600"><a href="index.html" class="link-text">Back to Home</a></p>
+        </main>
+    </div>
+
+    <footer>
+        <p id="current-datetime"></p> <!-- Placeholder for current date and time -->
+        <p>&copy; 2023 The Daily Grind Coffee House. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to add the current date and time from server to the footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const datetimeElement = document.getElementById('current-datetime');
+            if (datetimeElement) {
+                fetch('get_datetime.php')
+                    .then(response => response.text())
+                    .then(data => {
+                        datetimeElement.textContent = data;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching date and time:', error);
+                        datetimeElement.textContent = 'Date and time unavailable.';
+                    });
+            }
+        });
+    </script>
+</body>
+</html>
