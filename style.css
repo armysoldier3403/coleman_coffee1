@@ -1,200 +1,393 @@
-/* General Body Styles */
+/* style.css */
+
+/* Basic body styling for consistent font, background, and text color */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, clean font */
-    margin: 0; /* Remove default body margin */
-    padding: 0; /* Remove default body padding */
-    background-color: #f8f8f8; /* Light background for the whole page */
-    color: #333; /* Dark gray text for readability */
-    line-height: 1.6; /* Improve readability of text */
+    font-family: 'Inter', sans-serif; /* Using Inter font for a modern look */
+    background-color: #f8f8f8; /* Light background color */
+    color: #333; /* Dark gray text color */
+    margin: 0;
+    padding: 0; /* Reset default padding */
+    line-height: 1.6; /* Improved readability */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
 }
 
-/* Header Styling */
+/* Container for main content to center and add visual appeal */
+.container {
+    background-color: #ffffff; /* White background for content areas */
+    padding: 2.5rem; /* Ample padding inside the container */
+    border-radius: 1rem; /* Rounded corners for a softer look */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 900px; /* Maximum width for readability on large screens */
+    width: 90%; /* Responsive width */
+    margin: 2rem auto; /* Center the container with top/bottom margin */
+    text-align: center; /* Center align text within the container */
+    border: 1px solid #e0e0e0; /* Light border for definition */
+}
+
+/* Header styling */
 header {
-    background-color: #5C4033; /* Dark coffee brown */
-    color: #fff; /* White text */
-    padding: 20px 0;
+    width: 100%;
     text-align: center;
-    border-bottom: 5px solid #A0522D; /* SaddleBrown border */
-}
-
-header h1 {
-    margin: 0;
-    padding-bottom: 10px;
-    font-size: 2.5em; /* Larger heading for main title */
-}
-
-/* Logo and Address Container */
-.top-bar {
-    display: flex; /* Use flexbox for alignment */
-    justify-content: space-between; /* Space out logo and address */
-    align-items: center; /* Vertically align items */
-    padding: 10px 20px;
-    background-color: #fff; /* White background for the top bar */
+    padding: 1.5rem 0;
+    background-color: #fdfdfd; /* Slightly different background for header */
     border-bottom: 1px solid #eee;
+    margin-bottom: 2rem;
 }
 
-.top-bar img {
-    max-width: 200px; /* Adjust logo size */
+/* Logo image styling */
+.logo {
+    max-width: 250px; /* Limit logo size */
     height: auto;
-    display: block; /* Remove extra space below image */
+    display: block; /* Ensure it behaves as a block element for margin auto */
+    margin: 0 auto 1.5rem auto; /* Center logo with bottom margin */
+    border-radius: 0.5rem; /* Slightly rounded logo */
 }
 
-.address-info {
-    text-align: right;
-    font-size: 0.9em;
-    color: #666;
-}
-
-/* Navigation Bar */
+/* Navigation bar styling */
 nav {
-    background-color: #A0522D; /* SaddleBrown for navigation */
-    padding: 10px 0;
+    background-color: #4f46e5; /* Primary brand color for nav */
+    padding: 0.8rem 0;
+    border-radius: 0.75rem; /* Rounded navigation bar */
+    margin-top: 1.5rem; /* Space below the logo */
+    display: flex; /* Use flexbox for horizontal links */
+    justify-content: center; /* Center the navigation links */
+    flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+    gap: 1.5rem; /* Space between navigation items */
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); /* Shadow for nav */
+}
+
+nav a {
+    color: #ffffff; /* White text for nav links */
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border-radius: 0.5rem;
+}
+
+nav a:hover {
+    background-color: #4338ca; /* Darker background on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Headings */
+h1 {
+    font-size: 2.8rem; /* Larger main heading */
+    font-weight: 700;
+    color: #1f2937; /* Darker text */
+    margin-bottom: 1rem;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
 }
 
-nav ul {
-    list-style: none; /* Remove bullet points */
-    padding: 0;
-    margin: 0;
-    display: flex; /* Arrange links in a row */
-    justify-content: center; /* Center the links */
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #374151;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
-nav ul li {
-    margin: 0 15px; /* Spacing between navigation items */
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #374151;
+    margin-top: 1.2rem;
+    margin-bottom: 0.8rem;
+    text-align: left; /* Align h3 to left for form labels */
 }
 
-nav ul li a {
-    color: #fff; /* White link text */
-    text-decoration: none; /* Remove underline */
-    font-weight: bold;
-    padding: 8px 15px;
-    border-radius: 5px; /* Rounded corners for links */
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
+/* Paragraphs */
+p {
+    margin-bottom: 1rem;
+    color: #4b5563;
+    text-align: center;
 }
 
-nav ul li a:hover,
-nav ul li a:focus {
-    background-color: #8B4513; /* Darker brown on hover/focus */
-}
-
-/* Main Content Area */
-main {
-    padding: 20px;
-    max-width: 960px; /* Max width for content */
-    margin: 20px auto; /* Center the main content */
-    background-color: #fff; /* White background for content */
-    border-radius: 8px; /* Rounded corners for the content box */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Soft shadow */
-}
-
-main h2 {
-    color: #5C4033; /* Coffee brown heading */
-    border-bottom: 2px solid #eee; /* Subtle underline */
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-main ul, main ol {
-    margin-bottom: 20px;
+/* List styling */
+ul, ol {
+    margin: 1.5rem auto;
     padding-left: 25px;
+    text-align: left;
+    max-width: 500px; /* Constrain list width */
+    list-style-position: inside; /* Keep bullets/numbers inside */
 }
 
-main ul li, main ol li {
-    margin-bottom: 8px;
+li {
+    margin-bottom: 0.7rem;
+    color: #4b5563;
 }
 
-main img {
-    max-width: 100%; /* Ensure images are responsive */
+/* Image styling for content images */
+.content-image {
+    max-width: 100%;
     height: auto;
-    display: block; /* Center block images */
-    margin: 20px auto;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 0.75rem;
+    margin: 2rem auto; /* Center image with top/bottom margin */
+    display: block; /* Ensure it takes full width and respects margin auto */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for content images */
 }
 
-/* Contact Form Styling */
+/* Address and contact info styling */
+.address-info {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    color: #374151;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Form styling */
+.form-container {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    margin-top: 2rem;
+    text-align: left; /* Align form elements to the left */
+}
+
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 1.25rem;
 }
 
 .form-group label {
-    display: block; /* Labels on their own line */
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #5C4033;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #374151;
 }
 
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="tel"],
+.form-group input[type="password"], /* Added for register/login forms */
 .form-group select,
 .form-group textarea {
-    width: calc(100% - 22px); /* Full width minus padding and border */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Include padding and border in width */
-    font-size: 1em;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    background-color: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="password"]:focus, /* Added for register/login forms */
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    outline: none;
 }
 
 .form-group textarea {
     resize: vertical; /* Allow vertical resizing */
-    min-height: 80px;
+    min-height: 100px;
 }
 
 .checkbox-group {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 0.75rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: #4f46e5; /* Style checkbox with brand color */
 }
 
 .checkbox-group label {
-    display: inline-block; /* Keep label next to checkbox */
-    margin-left: 5px;
-    font-weight: normal;
+    font-weight: 500;
+    color: #4b5563;
 }
 
-button[type="submit"],
-button[type="reset"] {
-    background-color: #A0522D; /* SaddleBrown buttons */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 1em;
-    margin-right: 10px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #4f46e5;
+    border: none;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
 }
 
-button[type="submit"]:hover,
-button[type="reset"]:hover {
-    background-color: #8B4513; /* Darker brown on hover */
+.btn:hover {
+    background-color: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.4);
 }
 
-/* Footer Styling */
+.btn-secondary {
+    background-color: #6b7280;
+    box-shadow: 0 4px 10px rgba(107, 114, 128, 0.3);
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+    box-shadow: 0 6px 15px rgba(107, 114, 128, 0.4);
+}
+
+/* Footer styling (optional, but good practice) */
 footer {
-    background-color: #333; /* Dark gray footer */
-    color: #fff;
+    margin-top: 3rem;
+    padding: 1.5rem;
     text-align: center;
-    padding: 20px 0;
-    margin-top: 30px;
-    font-size: 0.85em;
+    color: #6b7280;
+    font-size: 0.9rem;
+    width: 100%;
+    background-color: #f0f0f0;
+    border-top: 1px solid #e0e0e0;
 }
 
-/* Utility classes for text alignment (example of <span> usage) */
-.text-center {
-    text-align: center;
+/* Specific styles for validation messages */
+.error-message {
+    color: #dc2626; /* Red color for errors */
+    font-size: 0.875rem; /* Smaller font size */
+    margin-top: 0.25rem;
+    text-align: left;
+    display: block; /* Ensure it takes its own line */
+}
+.form-group input.invalid,
+.form-group select.invalid,
+.form-group textarea.invalid { /* Added textarea */
+    border-color: #dc2626; /* Red border for invalid fields */
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+}
+.message-box {
+    background-color: #fef2f2; /* Light red for errors */
+    color: #dc2626; /* Dark red text */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1.5rem; /* Adjusted margin */
+    margin-bottom: 0.5rem; /* Adjusted margin */
+    border: 1px solid #ef4444;
+    text-align: left;
+}
+.message-box.success {
+    background-color: #ecfdf5; /* Light green for success */
+    color: #059669; /* Dark green text */
+    border-color: #10b981;
 }
 
-.text-right {
-    text-align: right;
+/* Poll specific styles */
+.poll-options label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    color: #374151;
+    cursor: pointer;
+    text-align: left;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
 }
 
-/* Clearfix for floats if used (not strictly needed with flexbox/grid) */
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
+.poll-options label:hover {
+    background-color: #f0f0f0;
+}
+
+.poll-options input[type="radio"] {
+    margin-right: 0.75rem;
+    accent-color: #4f46e5;
+    transform: scale(1.2); /* Slightly larger radio buttons */
+}
+
+.poll-results {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.poll-results div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #4b5563;
+}
+
+.poll-bar-container {
+    background-color: #e0e0e0;
+    height: 15px;
+    border-radius: 5px;
+    margin-top: 0.2rem;
+    overflow: hidden; /* Ensure bar stays within bounds */
+}
+
+.poll-bar {
+    height: 100%;
+    background-color: #4f46e5;
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+    h2 {
+        font-size: 1.8rem;
+    }
+    nav {
+        flex-direction: column; /* Stack nav links on smaller screens */
+        gap: 0.75rem;
+        padding: 0.8rem;
+    }
+    nav a {
+        width: calc(100% - 2rem); /* Full width minus padding */
+        text-align: center;
+    }
+    .button-group {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
 }
