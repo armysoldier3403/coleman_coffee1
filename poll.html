@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Grind Coffee Poll</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additions for poll specific styles */
+        .poll-options label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            color: #374151;
+            cursor: pointer;
+            text-align: left;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .poll-options label:hover {
+            background-color: #f0f0f0;
+        }
+
+        .poll-options input[type="radio"] {
+            margin-right: 0.75rem;
+            accent-color: #4f46e5;
+            transform: scale(1.2); /* Slightly larger radio buttons */
+        }
+
+        .poll-results {
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .poll-results div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #4b5563;
+        }
+
+        .poll-bar-container {
+            background-color: #e0e0e0;
+            height: 15px;
+            border-radius: 5px;
+            margin-top: 0.2rem;
+            overflow: hidden; /* Ensure bar stays within bounds */
+        }
+
+        .poll-bar {
+            height: 100%;
+            background-color: #4f46e5;
+            border-radius: 5px;
+            transition: width 0.5s ease-in-out;
+        }
+        .container {
+            background-color: #ffffff; /* White background for content */
+            padding: 2.5rem; /* Increased padding */
+            border-radius: 1rem; /* More rounded corners */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Stronger shadow */
+            max-width: 90%; /* Responsive width */
+            width: 500px; /* Max width for desktop */
+            text-align: center;
+        }
+        .form-container {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            margin-top: 2rem;
+            text-align: left; /* Align form elements to the left */
+        }
+         .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem; /* Increased padding */
+            border-radius: 0.75rem; /* More rounded buttons */
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #4f46e5; /* Primary brand color */
+            border: none;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3); /* Button shadow */
+        }
+        .btn:hover {
+            background-color: #4338ca; /* Darker on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+        .btn-secondary {
+            background-color: #6b7280; /* Gray for secondary actions */
+            box-shadow: 0 4px 10px rgba(107, 114, 128, 0.3);
+        }
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+        .message-box {
+            background-color: #fef2f2; /* Light red for errors */
+            color: #dc2626; /* Dark red text */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ef4444;
+            text-align: left;
+        }
+        .message-box.success {
+            background-color: #ecfdf5; /* Light green for success */
+            color: #059669; /* Dark green text */
+            border-color: #10b981;
+        }
+        h1 {
+            color: #1f2937; /* Darker heading */
+            margin-bottom: 1.5rem;
+            font-size: 2.25rem; /* Larger heading */
+            font-weight: 700;
+        }
+        .link-text {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .link-text:hover {
+            text-decoration: underline;
+        }
+        .flex-container {
+            display: flex;
+            gap: 1rem; /* Space between buttons */
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="houseblend.html">House Blend</a>
+                <a href="shop.php">Shop</a>
+                <a href="cart.php">Cart</a>
+                <a href="poll.html">Poll</a> <!-- Active Poll link -->
+                <a href="contact.html">Contact Us</a>
+                <a href="about.html">About Us</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="coffee_apps.php">Coffee Apps</a>
+                <a href="index.php?action=register">Register</a>
+                <a href="index.php?action=login">Login</a>
+                <a href="index.php?action=logout">Logout</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>What's Your Favorite Daily Grind Coffee?</h1>
+            
+            <div class="form-container">
+                <form id="pollForm">
+                    <div class="form-group poll-options" id="poll-options-container">
+                        <!-- Poll options will be loaded here by JavaScript -->
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn">Vote</button>
+                    </div>
+                </form>
+                <div id="poll-message" class="message-box" style="display: none;"></div>
+
+                <div class="poll-results" id="poll-results-container">
+                    <h2>Current Poll Results:</h2>
+                    <!-- Poll results will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </main>
+
+        <p class="mt-8">
+            <a href="index.php" class="btn btn-secondary">Back to Main Page</a>
+        </p>
+    </div>
+
+    <footer>
+        <p id="current-datetime"></p>
+        <p>&copy; 2023 The Daily Grind Coffee House. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // JavaScript to add the current date and time from server to the footer
+            const datetimeElement = document.getElementById('current-datetime');
+            if (datetimeElement) {
+                fetch('/get_datetime.php')
+                    .then(response => response.text())
+                    .then(data => {
+                        datetimeElement.textContent = data;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching date and time:', error);
+                        datetimeElement.textContent = 'Date and time unavailable.';
+                    });
+            }
+
+            const pollForm = document.getElementById('pollForm');
+            const pollOptionsContainer = document.getElementById('poll-options-container');
+            const pollResultsContainer = document.getElementById('poll-results-container');
+            const pollMessage = document.getElementById('poll-message');
+
+            function showPollMessage(message, type) {
+                pollMessage.textContent = message;
+                pollMessage.className = `message-box ${type}`;
+                pollMessage.style.display = 'block';
+            }
+
+            // Function to fetch and display poll options
+            function fetchPollOptions() {
+                fetch('/get_poll_results.php') // Using / for absolute path
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            pollOptionsContainer.innerHTML = ''; // Clear previous options
+                            data.results.forEach(item => {
+                                const radioHtml = `
+                                    <label>
+                                        <input type="radio" name="coffee_type" value="${item.coffee_type}" required>
+                                        ${item.coffee_type}
+                                    </label>
+                                `;
+                                pollOptionsContainer.insertAdjacentHTML('beforeend', radioHtml);
+                            });
+                            displayPollResults(data.results); // Also display results initially
+                        } else {
+                            showPollMessage(data.message, 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching poll options:', error);
+                        showPollMessage('Could not load poll options. Please try again.', 'error');
+                    });
+            }
+
+            // Function to display poll results
+            function displayPollResults(results) {
+                pollResultsContainer.innerHTML = '<h2>Current Poll Results:</h2>'; // Reset results
+                const totalVotes = results.reduce((sum, item) => sum + parseInt(item.vote_count), 0);
+
+                if (totalVotes === 0) {
+                    pollResultsContainer.insertAdjacentHTML('beforeend', '<p>No votes yet. Be the first to vote!</p>');
+                    return;
+                }
+
+                results.forEach(item => {
+                    const percentage = totalVotes > 0 ? (item.vote_count / totalVotes) * 100 : 0;
+                    const resultHtml = `
+                        <div>
+                            <span>${item.coffee_type}: ${item.vote_count} votes</span>
+                            <span>${percentage.toFixed(1)}%</span>
+                        </div>
+                        <div class="poll-bar-container">
+                            <div class="poll-bar" style="width: ${percentage}%;"></div>
+                        </div>
+                    `;
+                    pollResultsContainer.insertAdjacentHTML('beforeend', resultHtml);
+                });
+            }
+
+            // Handle poll form submission
+            pollForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const selectedOption = document.querySelector('input[name="coffee_type"]:checked');
+                if (!selectedOption) {
+                    showPollMessage('Please select a coffee type to vote.', 'error');
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('coffee_type', selectedOption.value);
+
+                fetch('/submit_vote.php', { // Using / for absolute path
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showPollMessage(data.message, 'success');
+                        fetchPollOptions(); // Refresh results after voting
+                    } else {
+                        showPollMessage(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error submitting vote:', error);
+                    showPollMessage('There was an error submitting your vote. Please try again.', 'error');
+                });
+            });
+
+            // Fetch poll options and results on page load
+            fetchPollOptions();
+        });
+    </script>
+</body>
+</html>
