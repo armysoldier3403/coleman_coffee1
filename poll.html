@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Preference Poll</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo">
+            <h1>Coffee Preference Poll</h1>
+        </header>
+
+        <div class="navbar">
+            <a href="index.php">Home</a>
+            <a href="#">Buy Online</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="about.html">About Us</a>
+            <a href="sitemap.html">Site Map</a>
+            <a href="registration.html">Register</a>
+            <a href="poll.html">Poll</a> </div>
+
+        <div class="content">
+            <p>What's your favorite type of coffee?</p>
+            <form id="pollForm">
+                <input type="radio" id="espresso" name="coffee" value="Espresso">
+                <label for="espresso">Espresso</label><br>
+
+                <input type="radio" id="latte" name="coffee" value="Latte">
+                <label for="latte">Latte</label><br>
+
+                <input type="radio" id="cappuccino" name="coffee" value="Cappuccino">
+                <label for="cappuccino">Cappuccino</label><br>
+
+                <input type="radio" id="americano" name="coffee" value="Americano">
+                <label for="americano">Americano</label><br><br>
+
+                <button type="submit">Vote</button>
+            </form>
+
+            <div id="pollResults">
+                <h3>Poll Results:</h3>
+                <p>Loading results...</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Current Date: <span id="currentDate"></span></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
