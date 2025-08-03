@@ -3,7 +3,7 @@
 
 // Business and user email addresses for testing
 // IMPORTANT: Replace these with your actual email addresses
-$businessEmail = 'your_business_email@example.com';
+$businessEmail = 'armysoldier3403@yahoo.com';
 $userEmail = $_POST['email'];
 
 // Form validation
