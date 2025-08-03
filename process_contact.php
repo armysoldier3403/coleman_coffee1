@@ -1,78 +1,61 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $salutation = $_POST['salutation'] ?? '';
-    $firstName = $_POST['firstName'] ?? '';
-    $lastName = $_POST['lastName'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $phone = $_POST['phone'] ?? '';
-    $subject = $_POST['subject'] ?? '';
-    $comments = $_POST['comments'] ?? '';
-    $receiveReply = isset($_POST['receiveReply']) ? 'Yes' : 'No';
+// This script processes the contact form, sends emails, and logs feedback
 
-    // Basic validation (more robust validation would be needed)
-    if (empty($firstName) || empty($lastName) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo json_encode(['success' => false, 'message' => 'Please fill in all required fields and provide a valid email.']);
-        exit;
-    }
+// Business and user email addresses for testing
+// IMPORTANT: Replace these with your actual email addresses
+$businessEmail = 'your_business_email@example.com';
+$userEmail = $_POST['email'];
 
-    // Business Email Configuration
-    $business_email = 'armysoldier3403@yahoo.com'; // **CHANGE THIS TO YOUR BUSINESS EMAIL**
-    $business_subject = "New Contact Form Submission from The Daily Grind Website";
-    $business_message = "
-    New Contact Form Submission:
-
-    Salutation: " . $salutation . "
-    First Name: " . $firstName . "
-    Last Name: " . $lastName . "
-    Email: " . $email . "
-    Phone: " . $phone . "
-    Subject: " . $subject . "
-    Comments: " . $comments . "
-    Wishes to receive a reply: " . $receiveReply . "
-    ";
-    $business_headers = 'From: noreply@yourdomain.com' . "\r\n" .
-                        'Reply-To: ' . $email . "\r\n" .
-                        'X-Mailer: PHP/' . phpversion();
-
-    // User Email Confirmation
-    $user_subject = "Thank You for Contacting The Daily Grind";
-    $user_message = "
-    Dear " . $salutation . " " . $lastName . ",
-
-    Thank you for your submission to The Daily Grind. We have received your message and will get back to you shortly if a reply was requested.
-
-    Here's a copy of your message:
-    Subject: " . $subject . "
-    Comments: " . $comments . "
-
-    Sincerely,
-    The Daily Grind Team
-    ";
-    $user_headers = 'From: The Daily Grind <noreply@yourdomain.com>' . "\r\n" .
-                    'Reply-To: ' . $business_email . "\r\n" .
-                    'X-Mailer: PHP/' . phpversion();
-
-    // Send emails
-    $business_mail_sent = mail($business_email, $business_subject, $business_message, $business_headers);
-    $user_mail_sent = mail($email, $user_subject, $user_message, $user_headers);
-
-    // Store feedback on server
-    $feedback_dir = 'feedback/';
-    if (!is_dir($feedback_dir)) {
-        mkdir($feedback_dir, 0755, true);
-    }
-    $filename = $feedback_dir . date('Y-m-d_H-i-s') . '_' . uniqid() . '.txt';
-    $feedback_content = "Date: " . date('Y-m-d H:i:s') . "\n" . $business_message;
-    file_put_contents($filename, $feedback_content);
-
-    if ($business_mail_sent && $user_mail_sent) {
-        echo json_encode(['success' => true, 'message' => 'Your message has been sent successfully! A confirmation email has been sent to you.']);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to send one or more emails. Please try again later.']);
-    }
-
-} else {
-    // Not a POST request
-    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+// Form validation
+if (empty($_POST['first-name']) || empty($_POST['last-name']) || empty($_POST['email']) || empty($_POST['message'])) {
+    // In a real-world scenario, you might redirect with an error message
+    die('Error: All form fields are required.');
 }
+
+// Sanitize inputs
+$firstName = htmlspecialchars($_POST['first-name']);
+$lastName = htmlspecialchars($_POST['last-name']);
+$email = htmlspecialchars($_POST['email']);
+$message = htmlspecialchars($_POST['message']);
+
+// --- 1. Send email to the business ---
+$businessSubject = "New Feedback from The Daily Grind Website";
+$businessMessage = "You have received new feedback from the website.\n\n"
+                 . "Name: $firstName $lastName\n"
+                 . "Email: $email\n"
+                 . "Message:\n$message";
+$businessHeaders = "From: webmaster@thedailygrind.com\r\n"
+                 . "Reply-To: $email\r\n"
+                 . "X-Mailer: PHP/" . phpversion();
+
+// Use a simple check for mail() success; it's not foolproof but sufficient for this example
+if (!mail($businessEmail, $businessSubject, $businessMessage, $businessHeaders)) {
+    // You could log this error or handle it more gracefully
+    error_log("Failed to send email to business.");
+}
+
+// --- 2. Send email confirmation to the user ---
+$userSubject = "Confirmation of Your Feedback to The Daily Grind";
+$userMessage = "Dear $firstName,\n\n"
+             . "Thank you for contacting us. We have received your message and will get back to you shortly.\n\n"
+             . "Here is a copy of your message:\n\n"
+             . "$message\n\n"
+             . "Sincerely,\n"
+             . "The Daily Grind Team";
+$userHeaders = "From: The Daily Grind <noreply@thedailygrind.com>\r\n"
+             . "Reply-To: $businessEmail\r\n"
+             . "X-Mailer: PHP/" . phpversion();
+
+if (!mail($userEmail, $userSubject, $userMessage, $userHeaders)) {
+    error_log("Failed to send confirmation email to user.");
+}
+
+// --- 3. Store a dated copy of the feedback on the server ---
+$feedbackFile = 'feedback-log.txt';
+$feedback = date('Y-m-d H:i:s') . " | Name: $firstName $lastName | Email: $email | Message: $message\n";
+file_put_contents($feedbackFile, $feedback, FILE_APPEND | LOCK_EX);
+
+// --- 4. Redirect the user with an immediate browser display confirmation ---
+header("Location: contact-us.php?status=success");
+exit();
 ?>
