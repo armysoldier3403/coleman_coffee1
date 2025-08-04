@@ -1,41 +1,27 @@
 <?php
-// This script processes the AJAX poll vote and returns the updated results
-$pollFile = 'poll-results.txt';
-$results = [];
+$file = 'poll_data.txt';
+$votes = [];
 
-// Read existing results from the file
-if (file_exists($pollFile)) {
-    $fileContent = file_get_contents($pollFile);
-    if (!empty($fileContent)) {
-        $results = json_decode($fileContent, true);
+// Read existing votes
+if (file_exists($file)) {
+    $content = file_get_contents($file);
+    $votes = json_decode($content, true);
+    if ($votes === null) { // Handle empty or invalid JSON
+        $votes = [];
     }
 }
 
-// Check if a vote was submitted
-if (isset($_POST['vote'])) {
-    $vote = $_POST['vote'];
-    // Increment the vote count for the selected option
-    if (isset($results[$vote])) {
-        $results[$vote]++;
+$selected_coffee = isset($_POST['coffee']) ? $_POST['coffee'] : '';
+
+if ($selected_coffee) {
+    if (isset($votes[$selected_coffee])) {
+        $votes[$selected_coffee]++;
     } else {
-        $results[$vote] = 1;
+        $votes[$selected_coffee] = 1;
     }
-
-    // Save the updated results back to the file
-    file_put_contents($pollFile, json_encode($results));
-}
-
-// Calculate total votes for percentage
-$totalVotes = array_sum($results);
-
-// Display the updated results
-echo '<h3>Current Poll Results</h3>';
-if ($totalVotes > 0) {
-    foreach ($results as $option => $count) {
-        $percentage = ($count / $totalVotes) * 100;
-        echo "<div><strong>$option:</strong> $count votes (" . round($percentage) . "%)</div>";
-    }
+    file_put_contents($file, json_encode($votes));
+    echo json_encode(['success' => true]);
 } else {
-    echo '<p>No votes yet.</p>';
+    echo json_encode(['success' => false, 'message' => 'No coffee selected.']);
 }
 ?>
