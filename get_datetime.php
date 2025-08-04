@@ -1,5 +1,5 @@
 <?php
-// PHP script to get the current date and time from the server
-date_default_timezone_set('America/Chicago'); // Set to your business location's timezone
-echo date('l, F j, Y - h:i:s A');
+// Set the timezone to your business location (Fort Johnson South, Louisiana is Central Daylight Time in July)
+date_default_timezone_set('America/Chicago');
+echo date('l, F j, Y h:i:s A'); // Format: Monday, March 1, 2099 08:30:00 AM
 ?>
