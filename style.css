@@ -145,6 +145,7 @@ form input[type="reset"]:hover {
     color: #DAA520; /* Goldenrod */
     font-weight: bold;
 }
+
 .footer {
     text-align: center;
     margin-top: 30px;
@@ -154,3 +155,4 @@ form input[type="reset"]:hover {
     color: #555;
     font-size: 0.9em;
 }
+
