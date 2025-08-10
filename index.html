@@ -7,43 +7,71 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="logo.jpg" alt="The Daily Grind Logo">
-            <h1>The Daily Grind</h1>
-        </header>
-
-        <div class="navbar">
+    <header>
+        <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+        <nav class="main-nav">
             <a href="index.html">Home</a>
-            <a href="#">Buy Online</a>
+            <a href="houseblend.html">House Blend</a>
             <a href="contact.html">Contact Us</a>
-            <a href="about.html">About Us</a>
             <a href="sitemap.html">Site Map</a>
-            <a href="registration.html">Register</a>
-            <a href="poll.html">Poll</a> </div>
+            <a href="register.html">Registration</a>
+        </nav>
+    </header>
 
-
-        <div class="content">
-            <div class="address-info">
-                <p><span class="highlight-text">605 Washington St</span></p>
-                <p><span class="highlight-text">Fayette, IA 52142</span></p>
-                <p><span class="highlight-text">Tel: 888-555-5555</span></p>
-                <p>Local Time: <span id="localDateTime">Loading...</span></p>
-            </div>
-
-            <h2>The Daily Grind</h2>
-            <ul>
-                <li>Specialty Coffees and Teas</li>
-                <li>Homemade Breads and Pastries</li>
-                <li><a href="house_blend.html">Take Home the Daily Grind House Blend</a></li>
-            </ul>
-
-            <img src="bread.jpg" alt="Assortment of Breads">
+    <main class="container">
+        <!-- ... (existing page content) ... -->
+        
+        <!-- Step 2: AJAX Poll Section -->
+        <div class="poll-container">
+            <h2>Our Daily Poll</h2>
+            <p>What is your favorite type of coffee?</p>
+            <form id="coffee-poll-form">
+                <div class="poll-options">
+                    <label><input type="radio" name="coffee_type" value="Espresso"> Espresso</label><br>
+                    <label><input type="radio" name="coffee_type" value="Latte"> Latte</label><br>
+                    <label><input type="radio" name="coffee_type" value="Drip Coffee"> Drip Coffee</label><br>
+                    <label><input type="radio" name="coffee_type" value="Cold Brew"> Cold Brew</label><br>
+                </div>
+                <button type="submit" class="button">Vote</button>
+            </form>
+            <div id="poll-result" style="margin-top: 15px; font-weight: bold;"></div>
         </div>
-    </div>
-    <div class="footer">
-        <p>Current Date: <span id="currentDate"></span></p>
-    </div>
-    <script src="script.js"></script>
+    </main>
+    
+    <!-- ... (rest of the page content) ... -->
+
+    <script>
+        // Step 2: JavaScript for AJAX Poll submission
+        document.getElementById('coffee-poll-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const userVote = formData.get('coffee_type');
+
+            if (!userVote) {
+                document.getElementById('poll-result').textContent = 'Please select an option to vote.';
+                return;
+            }
+
+            // This fetch call assumes a PHP script named 'poll_handler.php'
+            fetch('poll_handler.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json()) // Assumes server responds with JSON
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('poll-result').textContent = 'Thank you for your vote!';
+                    form.style.display = 'none'; // Hide the form after voting
+                } else {
+                    document.getElementById('poll-result').textContent = 'An error occurred. Please try again.';
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting poll:', error);
+                document.getElementById('poll-result').textContent = 'An error occurred. Please try again.';
+            });
+        });
+    </script>
 </body>
 </html>
