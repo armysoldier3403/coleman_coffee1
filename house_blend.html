@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Grind House Blend</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="house_blend.html">House Blend</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Register</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="poll.html">Poll</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>The Daily Grind House Blend</h1>
+            <p>One sip and you will understand what makes this house blend so special. Our blend is made with the finest Latin American beans and grown fresh when you order. Buy it by the cup or by the pound.</p>
+
+            <div class="list-section">
+                <h2>Available Options</h2>
+                <ol>
+                    <li>Traditional</li>
+                    <li>Decaffeinated</li>
+                    <li>Holiday blend</li>
+                </ol>
+            </div>
+
+            <p><a href="index.html">Back to Main Page</a></p>
+        </main>
+    </div>
+
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script>
+        function displayCurrentDate() {
+            const date = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = date.toLocaleDateString('en-US', options);
+        }
+        window.onload = displayCurrentDate;
+    </script>
+</body>
+</html>
