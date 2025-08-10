@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="products.html">Shop</a>
+                <a href="house_blend.html">House Blend</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Register</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="poll.html">Poll</a>
+                <a href="cart.html" class="cart-link">
+                    Shopping Cart (<span id="cart-count">0</span>)
+                </a>
+            </nav>
+        </header>
+        <main>
+            <h1>Our Products</h1>
+            <div id="product-list" class="product-grid">
+                <!-- Products will be loaded here via JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchProducts();
+            updateCartCount();
+        });
+
+        function fetchProducts() {
+            fetch('get_products.php')
+                .then(response => response.json())
+                .then(products => {
+                    const productList = document.getElementById('product-list');
+                    productList.innerHTML = '';
+                    products.forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.className = 'product-card';
+                        productCard.innerHTML = `
+                            <img src="${product.image_url}" alt="${product.name}">
+                            <h3>${product.name}</h3>
+                            <p>${product.description}</p>
+                            <p class="price">$${parseFloat(product.price).toFixed(2)}</p>
+                            <p class="inventory">In Stock: ${product.inventory}</p>
+                            <button onclick="addToCart(${product.product_id}, '${product.name}', ${product.price})">Add to Cart</button>
+                        `;
+                        productList.appendChild(productCard);
+                    });
+                })
+                .catch(error => console.error('Error fetching products:', error));
+        }
+        
+        function addToCart(productId, name, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || {};
+            if (cart[productId]) {
+                cart[productId].quantity++;
+            } else {
+                cart[productId] = { id: productId, name, price, quantity: 1 };
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert(`${name} added to cart!`);
+        }
+    </script>
+</body>
+</html>
