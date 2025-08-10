@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Grind Coffee House</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="products.html">Shop</a>
+                <a href="house_blend.html">House Blend</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Register</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="poll.html">Poll</a>
+                <a href="#" id="login-link">Login</a>
+                <a href="#" id="logout-link" style="display:none;">Logout</a>
+                <a href="cart.html" class="cart-link">
+                    Shopping Cart (<span id="cart-count">0</span>)
+                </a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>The Daily Grind Coffee House</h1>
+            <div class="login-form-container" id="login-form-container">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <input type="text" name="login_username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                    <a href="forgot_password.html">Forgot Password?</a>
+                    <p id="login-feedback"></p>
+                </form>
+            </div>
+            <div class="welcome-message" id="welcome-message" style="display:none;">
+                <h2>Welcome, <span id="username-display"></span>!</h2>
+                <p>You are now logged in and can enjoy your customer benefits.</p>
+            </div>
+            
+            <div class="date-time-container">
+                <p>Current Time at our Location:</p>
+                <p id="server-date-time">Fetching...</p>
+            </div>
+            
+            <div class="content-box">
+                <p>Specialty Coffees and Teas</p>
+                <p>Homemade Breads and Pastries</p>
+                <p><span class="highlight">Take Home the Daily Grind House Blend</span></p>
+            </div>
+            
+            <address>
+                605 Washington St<br>
+                Fayette, IA 52142<br>
+                888-555-5555
+            </address>
+
+            <div class="list-section">
+                <h2>Our Offerings</h2>
+                <ul>
+                    <li>Specialty Coffees and Teas</li>
+                    <li>Homemade Breads and Pastries</li>
+                    <li><a href="house_blend.html">Take Home the Daily Grind House Blend</a></li>
+                </ul>
+            </div>
+
+            <img src="bread.jpg" alt="Homemade Breads and Pastries" class="main-image">
+        </main>
+    </div>
+
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+    <script>
+        // Check for session on page load
+        window.onload = function() {
+            const username = localStorage.getItem('daily_grind_user');
+            if (username) {
+                document.getElementById('login-form-container').style.display = 'none';
+                document.getElementById('welcome-message').style.display = 'block';
+                document.getElementById('username-display').textContent = username;
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('logout-link').style.display = 'inline-block';
+            } else {
+                document.getElementById('login-form-container').style.display = 'block';
+                document.getElementById('welcome-message').style.display = 'none';
+                document.getElementById('login-link').style.display = 'inline-block';
+                document.getElementById('logout-link').style.display = 'none';
+            }
+            updateCartCount();
+        };
+
+        // Handle login form submission
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            fetch('login.php', {
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            })
+            .then(response => response.text())
+            .then(data => {
+                const feedback = document.getElementById('login-feedback');
+                if (data.includes('SUCCESS')) {
+                    const username = formData.get('login_username');
+                    localStorage.setItem('daily_grind_user', username); // Placeholder for session
+                    location.reload();
+                } else {
+                    feedback.textContent = 'Invalid username or password.';
+                    feedback.style.color = 'red';
+                }
+            });
+        });
+
+        // Handle logout link click
+        document.getElementById('logout-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('daily_grind_user'); // Placeholder
+            // In a real application, this would be an AJAX call to logout.php
+            location.reload();
+        });
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || {};
+            const count = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+    </script>
+</body>
+</html>
