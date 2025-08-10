@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="house_blend.html">House Blend</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Register</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="poll.html">Poll</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you! Please fill out the form below to get in touch.</p>
+
+            <div class="form-container">
+                <form id="contact-form" onsubmit="handleContactFormSubmit(event)">
+                    <div>
+                        <label for="first-name">First Name:</label>
+                        <input type="text" id="first-name" name="first_name" required>
+                    </div>
+                    <div>
+                        <label for="last-name">Last Name:</label>
+                        <input type="text" id="last-name" name="last_name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="user_email" required>
+                    </div>
+                    <div>
+                        <label for="msg">Message:</label>
+                        <textarea id="msg" name="user_message" rows="5" required></textarea>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit">Submit</button>
+                        <button type="reset" id="reset-button">Reset Form</button>
+                    </div>
+                </form>
+                <!-- Display submission feedback here -->
+                <p id="contact-feedback" class="feedback-message"></p>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script>
+        function handleContactFormSubmit(event) {
+            event.preventDefault(); // Prevent default form submission
+            const form = event.target;
+            const feedbackElement = document.getElementById('contact-feedback');
+            feedbackElement.textContent = ''; // Clear previous message
+            feedbackElement.className = 'feedback-message';
+
+            // Validate form fields
+            const firstName = document.getElementById('first-name').value.trim();
+            const lastName = document.getElementById('last-name').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            if (firstName === "" || lastName === "" || email === "") {
+                feedbackElement.textContent = "Please fill out all required fields.";
+                return;
+            }
+
+            // AJAX call to submit the form data
+            // NOTE: This will not work in this environment, as there is no PHP server.
+            // It is for demonstration purposes only.
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'contact_form.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        // Display immediate browser confirmation
+                        feedbackElement.textContent = 'Thank you for your feedback! A confirmation email has been sent to you.';
+                        feedbackElement.className = 'feedback-message success';
+                        form.reset(); // Clear form after successful submission
+                    } else {
+                        feedbackElement.textContent = 'There was an error submitting your form. Please try again later.';
+                        feedbackElement.className = 'feedback-message error';
+                    }
+                }
+            };
+
+            const formData = new URLSearchParams(new FormData(form)).toString();
+            xhr.send(formData);
+        }
+
+        // JavaScript to clear the form fields on reset button click
+        document.getElementById('reset-button').addEventListener('click', function(event) {
+            document.getElementById('contact-form').reset();
+            const feedbackElement = document.getElementById('contact-feedback');
+            feedbackElement.textContent = 'Form has been reset.';
+            feedbackElement.className = 'feedback-message';
+        });
+
+        // JavaScript to display the current date
+        function displayCurrentDate() {
+            const date = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = date.toLocaleDateString('en-US', options);
+        }
+        window.onload = displayCurrentDate;
+    </script>
+</body>
+</html>
