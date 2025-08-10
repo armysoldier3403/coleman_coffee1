@@ -5,41 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site Map - The Daily Grind</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .slideshow-container {
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .slideshow-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="logo.jpg" alt="The Daily Grind Logo">
-            <h1>Welcome to The Daily Grind Site Map</h1>
-        </header>
-
-        <div class="navbar">
+    <header>
+        <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+        <nav class="main-nav">
             <a href="index.html">Home</a>
-            <a href="#">Buy Online</a>
+            <a href="houseblend.html">House Blend</a>
             <a href="contact.html">Contact Us</a>
-            <a href="about.html">About Us</a>
             <a href="sitemap.html">Site Map</a>
-            <a href="registration.html">Register</a>
-            <a href="poll.html">Poll</a> </div>
+            <a href="register.html">Registration</a>
+        </nav>
+    </header>
 
-        </div>
-
-        <div class="content">
+    <main class="container">
+        <h1>Site Map</h1>
+        <p>Welcome to our site map. Here you can find links to all the main pages of our website.</p>
+        
+        <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#">Buy Online</a></li>
+                <li><a href="houseblend.html">House Blend</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="house_blend.html">The Daily Grind House Blend</a></li>
+                <li><a href="sitemap.html">Site Map</a></li>
+                <li><a href="register.html">Registration</a></li>
             </ul>
-            <img id="slideshowImage" src="coffee1.jpg" alt="Coffee Image Slideshow">
+        </nav>
+
+        <div class="slideshow-container">
+            <h2>Our Coffee</h2>
+            <!-- Step 3: Image for the slideshow -->
+            <img id="slideshowImage" class="slideshow-image" src="coffee 1.jpg">
         </div>
-    </div>
-    <script src="script.js"></script>
-<div class="footer">
-        <p>Current Date: <span id="currentDate"></span></p>
-    </div>
-    <script src="script.js"></script>
+    </main>
+
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script>
+        // Step 3: Add JavaScript for the rotating images
+        const images = [
+            "https://placehold.co/600x400/EADDCA/333333?text=Coffee+Image+1", // Placeholder for coffee1
+            "https://placehold.co/600x400/C2B280/333333?text=Coffee+Image+2"  // Placeholder for coffee2
+        ];
+        let currentIndex = 0;
+        const slideshowImage = document.getElementById('slideshowImage');
+
+        function rotateImages() {
+            currentIndex = (currentIndex + 1) % images.length;
+            slideshowImage.src = images[currentIndex];
+        }
+
+        // Rotate the image every 2 seconds
+        setInterval(rotateImages, 2000);
+
+        // Step 3: Add JavaScript for the current date
+        function displayCurrentDate() {
+            const date = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = date.toLocaleDateString('en-US', options);
+            document.getElementById('current-date').textContent = formattedDate;
+        }
+        window.onload = displayCurrentDate;
+    </script>
 </body>
 </html>
-
