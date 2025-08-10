@@ -7,60 +7,90 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="logo.jpg" alt="The Daily Grind Logo">
-            <h1>Contact The Daily Grind</h1>
-        </header>
-
-        <div class="navbar">
-           <a href="index.html">Home</a>
-            <a href="#">Buy Online</a>
+    <header>
+        <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="houseblend.html">House Blend</a>
             <a href="contact.html">Contact Us</a>
-            <a href="about.html">About Us</a>
             <a href="sitemap.html">Site Map</a>
-            <a href="registration.html">Register</a>
-            <a href="poll.html">Poll</a> </div>
-        </div>
+            <a href="register.html">Registration</a>
+        </nav>
+    </header>
 
-        <form id="contactForm">
-            <label for="salutation">Salutation:</label>
-            <select id="salutation" name="salutation">
-                <option value="">--Select--</option>
-                <option value="Mr.">Mr.</option>
-                <option value="Ms.">Ms.</option>
-                <option value="Mrs.">Mrs.</option>
-                <option value="Dr.">Dr.</option>
-            </select><br><br>
-
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" required><br><br>
-
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" required><br><br>
-
-            <label for="email">E-mail Address:</label>
-            <input type="email" id="email" name="email" required><br><br>
-
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone"><br><br>
-
-            <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject"><br><br>
-
-            <label for="comments">Comments:</label><br>
-            <textarea id="comments" name="comments" rows="8" cols="50"></textarea><br><br>
-
-            <input type="checkbox" id="receiveReply" name="receiveReply">
-            <label for="receiveReply">Please check here if you wish to receive a reply:</label><br><br>
-
-            <input type="submit" value="Submit">
-            <input type="reset" value="Reset Form">
+    <main class="container">
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you! Please fill out the form below and we'll get back to you as soon as possible.</p>
+        
+        <form id="contactForm" class="contact-form" action="#" method="post">
+            <div id="form-feedback" class="form-feedback"></div>
+            <div class="form-group">
+                <label for="fname">First Name:</label>
+                <input type="text" id="fname" name="firstname" required>
+            </div>
+            <div class="form-group">
+                <label for="lname">Last Name:</label>
+                <input type="text" id="lname" name="lastname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <span>
+                    <button type="submit" class="button">Submit</button>
+                    <button type="button" class="button button-secondary" onclick="document.getElementById('contactForm').reset();">Reset</button>
+                </span>
+            </div>
         </form>
-        <div id="formMessage"></div> </div>
-    <div class="footer">
-        <p>Current Date: <span id="currentDate"></span></p>
-    </div>
-    <script src="script.js"></script>
+    </main>
+
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script>
+        // Step 3: Add JavaScript to handle form submission with AJAX
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const feedbackDiv = document.getElementById('form-feedback');
+
+            // Basic client-side validation
+            const email = formData.get('email');
+            if (!email || !email.includes('@')) {
+                feedbackDiv.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            // This fetch call assumes a PHP script named 'contact_processor.php' on your server
+            fetch('contact_processor.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json()) // Assumes server responds with JSON
+            .then(data => {
+                if (data.success) {
+                    feedbackDiv.style.color = 'green';
+                    feedbackDiv.textContent = 'Thank you for your feedback! A confirmation has been sent to your email.';
+                    form.reset(); // Clear the form
+                } else {
+                    feedbackDiv.style.color = 'red';
+                    feedbackDiv.textContent = 'An error occurred. Please try again later.';
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                feedbackDiv.style.color = 'red';
+                feedbackDiv.textContent = 'An error occurred. Please try again later.';
+            });
+        });
+    </script>
 </body>
 </html>
