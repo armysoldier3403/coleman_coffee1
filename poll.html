@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Poll</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="house_blend.html">House Blend</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Register</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="poll.html">Poll</a>
+            </nav>
+        </header>
+        <main>
+            <h1>What's Your Favorite Coffee?</h1>
+            <p>Tell us your favorite type of coffee!</p>
+
+            <div class="poll-container">
+                <form id="poll-form" onsubmit="handlePollSubmit(event)">
+                    <div class="poll-option">
+                        <input type="radio" id="latte" name="coffee" value="latte">
+                        <label for="latte">Latte</label>
+                    </div>
+                    <div class="poll-option">
+                        <input type="radio" id="cappuccino" name="coffee" value="cappuccino">
+                        <label for="cappuccino">Cappuccino</label>
+                    </div>
+                    <div class="poll-option">
+                        <input type="radio" id="espresso" name="coffee" value="espresso">
+                        <label for="espresso">Espresso</label>
+                    </div>
+                    <div class="poll-option">
+                        <input type="radio" id="cold_brew" name="coffee" value="cold_brew">
+                        <label for="cold_brew">Cold Brew</label>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit">Vote</button>
+                    </div>
+                </form>
+                <div id="poll-results">
+                    <!-- Poll results will be displayed here via AJAX -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script>
+        function handlePollSubmit(event) {
+            event.preventDefault(); // Prevent default form submission
+            const form = event.target;
+            const selectedOption = form.querySelector('input[name="coffee"]:checked');
+            const pollResults = document.getElementById('poll-results');
+
+            if (!selectedOption) {
+                alert("Please select an option before voting.");
+                return;
+            }
+
+            // AJAX call to submit the poll vote
+            // NOTE: This will not work in this environment, as there is no PHP server.
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'poll.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        pollResults.innerHTML = this.responseText; // Display results from server
+                    } else {
+                        pollResults.innerHTML = '<p class="feedback-message error">Error submitting your vote. Please try again.</p>';
+                    }
+                }
+            };
+            
+            const formData = `vote=${selectedOption.value}`;
+            xhr.send(formData);
+        }
+
+        function displayCurrentDate() {
+            const date = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = date.toLocaleDateString('en-US', options);
+        }
+        window.onload = displayCurrentDate;
+    </script>
+</body>
+</html>
