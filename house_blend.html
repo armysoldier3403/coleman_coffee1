@@ -3,40 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Daily Grind House Blend</title>
+    <title>The Daily Grind Coffee House</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="logo.jpg" alt="The Daily Grind Logo">
-            <h1>The Daily Grind House Blend</h1>
-        </header>
-
-        <div class="navbar">
+    <header>
+        <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+        
+        <!-- Updated navigation to include Site Map and Registration links -->
+        <nav class="main-nav">
             <a href="index.html">Home</a>
-            <a href="#">Buy Online</a>
+            <a href="houseblend.html">House Blend</a>
             <a href="contact.html">Contact Us</a>
-            <a href="about.html">About Us</a>
             <a href="sitemap.html">Site Map</a>
-            <a href="registration.html">Register</a>
-            <a href="poll.html">Poll</a> </div>
+            <a href="register.html">Registration</a>
+        </nav>
+    </header>
 
+    <main class="container">
+        <h1>The Daily Grind Coffee House</h1>
+        <p>Specialty Coffees and Teas</p>
+        <p>Homemade Breads and Pastries</p>
+        <p><a href="houseblend.html">Take Home the Daily Grind House Blend</a></p>
+        <div class="contact-info">
+            <p>605 Washington St</p>
+            <p>Fayette, IA 52142</p>
+            <p>888-555-5555</p>
         </div>
 
-        <div class="content">
-            <p>One sip and you will understand what makes this house blend so special. Our blend is made with the finest Latin American beans and grown fresh when you order. Buy it by the cup or by the pound.</p>
-            <ol>
-                <li>Traditional</li>
-                <li>Decaffeinated</li>
-                <li>Holiday blend</li>
-            </ol>
-        </div>
-    </div>
-<div class="footer">
-        <p>Current Date: <span id="currentDate"></span></p>
-    </div>
-    <script src="script.js"></script>
+        <h2>Our Specialties:</h2>
+        <ul>
+            <li>Specialty Coffees and Teas</li>
+            <li>Homemade Breads and Pastries</li>
+            <li>Take Home the Daily Grind House Blend</li>
+        </ul>
+
+        <img src="bread.jpg" alt="Homemade Breads and Pastries" class="main-image">
+    </main>
+
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script>
+        // Step 3: Add JavaScript for the current date
+        function displayCurrentDate() {
+            const date = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = date.toLocaleDateString('en-US', options);
+            document.getElementById('current-date').textContent = formattedDate;
+        }
+        window.onload = displayCurrentDate;
+    </script>
 </body>
 </html>
-
