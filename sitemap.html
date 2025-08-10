@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Map</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="house_blend.html">House Blend</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Register</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="poll.html">Poll</a>
+            </nav>
+        </header>
+        <main>
+            <h1>Site Map</h1>
+            <p>This page provides a quick overview and links to all pages on our website.</p>
+            <div class="sitemap-links">
+                <a href="index.html">Home</a>
+                <a href="house_blend.html">House Blend</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Register</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="poll.html">Poll</a>
+            </div>
+
+            <h2>Our Coffee Images</h2>
+            <div class="slideshow-container">
+                <img id="slideshow-image" src="coffee1.jpg" alt="Coffee Image" class="slideshow-image">
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script>
+        const images = [
+            "coffee1.jpg",
+            "coffee2.jpg"
+        ];
+        let currentIndex = 0;
+
+        function rotateImage() {
+            const slideshowImage = document.getElementById('slideshow-image');
+            currentIndex = (currentIndex + 1) % images.length;
+            slideshowImage.src = images[currentIndex];
+        }
+
+        setInterval(rotateImage, 2000);
+
+        function displayCurrentDate() {
+            const date = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = date.toLocaleDateString('en-US', options);
+        }
+        window.onload = displayCurrentDate;
+    </script>
+</body>
+</html>
