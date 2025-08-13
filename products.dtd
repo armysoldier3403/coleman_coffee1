@@ -1,0 +1,14 @@
+<!ELEMENT products (product+)>
+<!ELEMENT product (name, category, description, details, price, inventory)>
+<!ATTLIST product sku CDATA #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT details (weight, roast_level?, origin?)>
+<!ELEMENT weight (#PCDATA)>
+<!ATTLIST weight unit CDATA #REQUIRED>
+<!ELEMENT roast_level (#PCDATA)>
+<!ELEMENT origin (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ATTLIST price currency CDATA #REQUIRED>
+<!ELEMENT inventory (#PCDATA)>
