@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE products SYSTEM "products.dtd">
+<?xml-stylesheet type="text/css" href="products.css"?>
+
+<products>
+    <product sku="HBT-001">
+        <name>House Blend - Traditional</name>
+        <category>Coffee Beans</category>
+        <description>Our signature blend of Latin American beans, perfect for a classic cup of coffee.</description>
+        <details>
+            <weight unit="kg">0.50</weight>
+            <roast_level>Medium</roast_level>
+            <origin>Colombia</origin>
+        </details>
+        <price currency="USD">14.99</price>
+        <inventory>50</inventory>
+    </product>
+    <product sku="HBD-002">
+        <name>House Blend - Decaf</name>
+        <category>Coffee Beans</category>
+        <description>A decaffeinated version of our popular house blend with the same great taste.</description>
+        <details>
+            <weight unit="kg">0.50</weight>
+            <roast_level>Medium</roast_level>
+            <origin>Brazil</origin>
+        </details>
+        <price currency="USD">15.99</price>
+        <inventory>30</inventory>
+    </product>
+    <product sku="MGE-003">
+        <name>Morning Glory Espresso</name>
+        <category>Coffee Beans</category>
+        <description>A bold and rich espresso blend with notes of dark chocolate and nuts.</description>
+        <details>
+            <weight unit="kg">0.50</weight>
+            <roast_level>Dark</roast_level>
+            <origin>Ethiopia</origin>
+        </details>
+        <price currency="USD">16.99</price>
+        <inventory>45</inventory>
+    </product>
+    <product sku="FR-004">
+        <name>French Roast</name>
+        <category>Coffee Beans</category>
+        <description>A very dark roast with a smoky flavor and low acidity.</description>
+        <details>
+            <weight unit="kg">0.50</weight>
+            <roast_level>Dark</roast_level>
+            <origin>Indonesia</origin>
+        </details>
+        <price currency="USD">13.99</price>
+        <inventory>60</inventory>
+    </product>
+    <product sku="EY-005">
+        <name>Ethiopian Yirgacheffe</name>
+        <category>Coffee Beans</category>
+        <description>A light-bodied coffee with floral and citrus notes.</description>
+        <details>
+            <weight unit="kg">0.50</weight>
+            <roast_level>Light</roast_level>
+            <origin>Ethiopia</origin>
+        </details>
+        <price currency="USD">18.50</price>
+        <inventory>25</inventory>
+    </product>
+    <product sku="GA-006">
+        <name>Guatemalan Antigua</name>
+        <category>Coffee Beans</category>
+        <description>A sweet and balanced coffee with a hint of spice.</description>
+        <details>
+            <weight unit="kg">0.50</weight>
+            <roast_level>Medium</roast_level>
+            <origin>Guatemala</origin>
+        </details>
+        <price currency="USD">17.25</price>
+        <inventory>40</inventory>
+    </product>
+    <product sku="CM-007">
+        <name>Coffee Mug - The Daily Grind</name>
+        <category>Merchandise</category>
+        <description>Our branded ceramic coffee mug, perfect for your daily brew.</description>
+        <details>
+            <weight unit="kg">0.35</weight>
+        </details>
+        <price currency="USD">9.50</price>
+        <inventory>100</inventory>
+    </product>
+    <product sku="PC-008">
+        <name>Pour-Over Coffee Maker</name>
+        <category>Equipment</category>
+        <description>A simple and elegant pour-over brewer for the perfect single cup.</description>
+        <details>
+            <weight unit="kg">0.80</weight>
+        </details>
+        <price currency="USD">25.00</price>
+        <inventory>15</inventory>
+    </product>
+    <product sku="FP-009">
+        <name>French Press</name>
+        <category>Equipment</category>
+        <description>A classic French press for a rich and full-bodied coffee.</description>
+        <details>
+            <weight unit="kg">0.90</weight>
+        </details>
+        <price currency="USD">29.00</price>
+        <inventory>20</inventory>
+    </product>
+    <product sku="OGT-010">
+        <name>Organic Green Tea</name>
+        <category>Tea</category>
+        <description>A refreshing and smooth organic green tea blend.</description>
+        <details>
+            <weight unit="kg">0.25</weight>
+        </details>
+        <price currency="USD">11.00</price>
+        <inventory>70</inventory>
+    </product>
+</products>
