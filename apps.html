@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Coffee Apps</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="products.html">Shop</a>
+                <a href="house_blend.html">House Blend</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Register</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="poll.html">Poll</a>
+                <a href="apps.html">Our Apps</a>
+                <a href="nutrition.html">Nutrition Info</a>
+                <a href="products.xml">Product XML</a>
+                <a href="cart.html" class="cart-link">
+                    Shopping Cart (<span id="cart-count">0</span>)
+                </a>
+            </nav>
+        </header>
+        <main>
+            <h1>Our Custom Apps</h1>
+            <div id="app-list" class="app-list">
+                <!-- App names will be loaded here -->
+            </div>
+            <div id="app-details" class="app-details">
+                <!-- App details will be shown here -->
+            </div>
+        </main>
+    </div>
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchApps();
+            updateCartCount();
+        });
+
+        function fetchApps() {
+            fetch('apps_api.php')
+                .then(response => response.json())
+                .then(apps => {
+                    const appList = document.getElementById('app-list');
+                    appList.innerHTML = '';
+                    apps.forEach(app => {
+                        const appLink = document.createElement('a');
+                        appLink.href = "#";
+                        appLink.className = "app-link";
+                        appLink.textContent = app.name;
+                        appLink.onclick = () => showAppDetails(app);
+                        appList.appendChild(appLink);
+                        appList.appendChild(document.createElement('br'));
+                    });
+                })
+                .catch(error => console.error('Error fetching apps:', error));
+        }
+
+        function showAppDetails(app) {
+            const appDetailsDiv = document.getElementById('app-details');
+            appDetailsDiv.innerHTML = `
+                <h3>App Name: ${app.name}</h3>
+                <p><strong>Price:</strong> ${app.price}</p>
+                <p><strong>Description:</strong> ${app.description}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
