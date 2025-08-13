@@ -1,0 +1,101 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F5EFE6;
+    color: #4A2C2C;
+    line-height: 1.6;
+    margin: 20px;
+}
+
+products {
+    display: block;
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border: 1px solid #D1C4B0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+product {
+    display: block;
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #A37A59;
+    border-radius: 8px;
+    background-color: #F9F5F1;
+}
+
+product[sku]:before {
+    content: "SKU: " attr(sku);
+    font-size: 0.9em;
+    color: #8C6A4F;
+    display: block;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+name {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #6A4434;
+    margin-bottom: 5px;
+}
+
+category {
+    display: block;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #A37A59;
+    margin-bottom: 10px;
+}
+
+description {
+    display: block;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+details {
+    display: block;
+    margin-bottom: 15px;
+    border-left: 3px solid #D1C4B0;
+    padding-left: 10px;
+}
+
+weight:before {
+    content: "Weight: ";
+    font-weight: bold;
+}
+weight:after {
+    content: " " attr(unit);
+}
+
+roast_level:before {
+    content: "Roast Level: ";
+    font-weight: bold;
+}
+
+origin:before {
+    content: "Country of Origin: ";
+    font-weight: bold;
+}
+
+price {
+    display: block;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #A37A59;
+    margin-bottom: 10px;
+}
+
+price:before {
+    content: "Price: " attr(currency) " ";
+}
+
+inventory:before {
+    content: "In Stock: ";
+    font-style: italic;
+    color: #8C6A4F;
+}
