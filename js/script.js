@@ -29,4 +29,11 @@ function getMyServerDateTime() {
 getMyServerDateTime();
 setInterval(getMyServerDateTime, 60000); // Refresh every 60 seconds
 
-// Other shared functions can go here...
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || {};
+    const count = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+    const cartCountElement = document.getElementById('cart-count');
+    if (cartCountElement) {
+        cartCountElement.textContent = count;
+    }
+}
