@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="products.html">Shop</a>
+                <a href="house_blend.html">House Blend</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Register</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="poll.html">Poll</a>
+                <a href="apps.html">Our Apps</a>
+                <a href="nutrition.html">Nutrition Info</a>
+                <a href="products.xml">Product XML</a>
+                <a href="cart.html" class="cart-link">
+                    Shopping Cart (<span id="cart-count">0</span>)
+                </a>
+            </nav>
+        </header>
+        <main>
+            <h1>About The Daily Grind</h1>
+            <div class="content-box">
+                <p>Welcome to The Daily Grind, your local haven for the finest coffee beans and fresh-baked goods. We are committed to providing a warm, welcoming atmosphere where you can relax and enjoy the perfect cup of coffee. Our beans are sourced ethically and roasted in-house to ensure the highest quality and flavor in every sip.</p>
+                <p>Our passion for coffee is matched only by our love for our community. We believe in building connections, one cup at a time.</p>
+            </div>
+            <h2>Our Location</h2>
+            <address class="map-address">
+                605 Washington St<br>
+                Fayette, IA 52142
+            </address>
+            <div id="map" class="map-container"></div>
+        </main>
+    </div>
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+        });
+    </script>
+    <!-- Google Maps API script -->
+    <script async defer src="[https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap](https://maps.googleapis.com/maps/api/js?key=AIzaSyDM5oOo-mDCwpWDFGjX8KZkyV2UuwdZsVk&callback=initMap)"></script>
+    <script>
+        let map;
+        function initMap() {
+            const fayette = { lat: 43.0181, lng: -91.8021 };
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: fayette,
+                zoom: 15,
+            });
+            new google.maps.Marker({
+                position: fayette,
+                map: map,
+                title: "The Daily Grind",
+            });
+        }
+    </script>
+</body>
+</html>
