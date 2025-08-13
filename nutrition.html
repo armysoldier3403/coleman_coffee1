@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Information</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.jpg" alt="The Daily Grind Logo" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="products.html">Shop</a>
+                <a href="house_blend.html">House Blend</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="registration.html">Register</a>
+                <a href="sitemap.html">Site Map</a>
+                <a href="poll.html">Poll</a>
+                <a href="apps.html">Our Apps</a>
+                <a href="nutrition.html">Nutrition Info</a>
+                <a href="products.xml">Product XML</a>
+                <a href="cart.html" class="cart-link">
+                    Shopping Cart (<span id="cart-count">0</span>)
+                </a>
+            </nav>
+        </header>
+        <main>
+            <h1>Nutrition Information</h1>
+            <p>Enter a food item to get its nutritional facts. For example, "1 cup of black coffee".</p>
+            <div class="nutrition-form">
+                <input type="text" id="food-query" placeholder="Enter food item...">
+                <button onclick="getNutritionInfo()">Search</button>
+            </div>
+            <div id="nutrition-results" class="nutrition-results">
+                <!-- Results will be displayed here -->
+            </div>
+        </main>
+    </div>
+    <footer>
+        <p id="current-date"></p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+        });
+
+        function getNutritionInfo() {
+            const query = document.getElementById('food-query').value;
+            if (query.trim() === '') {
+                alert('Please enter a food item.');
+                return;
+            }
+
+            const resultsDiv = document.getElementById('nutrition-results');
+            resultsDiv.innerHTML = '<p>Fetching nutrition data...</p>';
+
+            fetch(`nutrition_proxy.php?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    resultsDiv.innerHTML = '';
+                    if (data.status === 'success' && data.nutrients) {
+                        let html = `<h3>Nutrition Facts for "${data.query}"</h3><table><thead><tr><th>Nutrient</th><th>Amount</th><th>Unit</th></tr></thead><tbody>`;
+                        for (const key in data.nutrients) {
+                            const nutrient = data.nutrients[key];
+                            html += `<tr><td>${nutrient.label}</td><td>${nutrient.quantity.toFixed(2)}</td><td>${nutrient.unit}</td></tr>`;
+                        }
+                        html += `</tbody></table>`;
+                        resultsDiv.innerHTML = html;
+                    } else {
+                        resultsDiv.innerHTML = `<p>Error: ${data.message}</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching nutrition data:', error);
+                    resultsDiv.innerHTML = `<p>An error occurred. Please try again.</p>`;
+                });
+        }
+    </script>
+</body>
+</html>
